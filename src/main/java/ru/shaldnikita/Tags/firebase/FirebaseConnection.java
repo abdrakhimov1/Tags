@@ -5,6 +5,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.stereotype.Component;
 import ru.shaldnikita.Tags.app.HasLogger;
+import ru.shaldnikita.Tags.app.TagsApplication;
 
 import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
@@ -21,11 +22,11 @@ public class FirebaseConnection implements HasLogger {
     private void init() {
         getLogger().info("init {}",FirebaseConnection.class.getSimpleName());
 
-        try (FileInputStream serviceAccount = new FileInputStream("key.json")){
+        try (FileInputStream serviceAccount = new FileInputStream(TagsApplication.KEY_FILE_NAME)){
 
             options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://tagsproject1.firebaseio.com")
+                    .setDatabaseUrl(TagsApplication.DATABASE_URL)
                     .build();
 
             FirebaseApp.initializeApp(options);
@@ -35,9 +36,4 @@ public class FirebaseConnection implements HasLogger {
             getLogger().info("{} \n {}", e.getMessage(), e.getCause());
         }
     }
-
-    public FirebaseApp getInstance(){
-        return FirebaseApp.getInstance();
-    }
-
 }

@@ -21,7 +21,6 @@ public class FirebaseConnectionProvider implements HasLogger{
     private FirebaseDatabase database;
 
     private DatabaseReference categoriesRef;
-    private DatabaseReference tagRef;
 
 
     @PostConstruct
