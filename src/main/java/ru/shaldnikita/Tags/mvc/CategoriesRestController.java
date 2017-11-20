@@ -3,6 +3,8 @@ package ru.shaldnikita.Tags.mvc;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,8 @@ public class CategoriesRestController implements HasLogger {
 
     private DatabaseReference categoriesRef;
 
+    private volatile Map<String,Category> categories = new HashMap<>();
+
     @Autowired
     public void setCategoriesRef(FirebaseConnectionProvider firebaseConnectionProvider) {
         this.categoriesRef = firebaseConnectionProvider.getCategoriesRef();
@@ -42,18 +46,20 @@ public class CategoriesRestController implements HasLogger {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{category}")
     Category readCategory(@PathVariable String category) {
-
         getLogger().info("GET {}", category);
+
         List<Category> categoryList = new ArrayList<>();
 
         boolean[] flag = new boolean[1];
         flag[0] = false;
 
         categoriesRef.child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Category cat = dataSnapshot.getValue(Category.class);
+
                 categoryList.add(cat);
                 flag[0] = true;
             }
@@ -67,6 +73,7 @@ public class CategoriesRestController implements HasLogger {
         while (!flag[0]){
 
         }
+        getLogger().info("done");
             return categoryList.size() > 0 ? categoryList.get(0) : null;
     }
 
@@ -76,12 +83,18 @@ public class CategoriesRestController implements HasLogger {
 
         List<Category> categories = new ArrayList<>();
 
+        boolean[] flag = new boolean[1];
+        flag[0] = false;
+
         categoriesRef.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getChildren().forEach(child ->{
                     categories.add(child.getValue(Category.class));
+
+                    if (categories.size()==dataSnapshot.getChildrenCount())
+                        flag[0]=true;
                 });
             }
 
@@ -91,13 +104,17 @@ public class CategoriesRestController implements HasLogger {
             }
         });
 
-        return  categories;
+        while (!flag[0]){
+
+        }
+
+        return categories;
     }
 
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<?> add(@RequestBody Category category){
 
         categoriesRef.setValueAsync(category);
-        return new ResponseEntity<Tag>(HttpStatus.OK);
+        return new ResponseEntity<Category>(HttpStatus.OK);
     }
 }
