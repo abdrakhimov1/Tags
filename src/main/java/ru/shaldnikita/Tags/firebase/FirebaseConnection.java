@@ -5,7 +5,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.stereotype.Component;
 import ru.shaldnikita.Tags.app.HasLogger;
-import ru.shaldnikita.Tags.app.TagsApplication;
+import ru.shaldnikita.Tags.app.Application;
 
 import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
@@ -22,11 +22,11 @@ public class FirebaseConnection implements HasLogger {
     private void init() {
         getLogger().info("init {}",FirebaseConnection.class.getSimpleName());
 
-        try (FileInputStream serviceAccount = new FileInputStream(TagsApplication.KEY_FILE_NAME)){
+        try (FileInputStream serviceAccount = new FileInputStream(Application.KEY_FILE_NAME)){
 
             options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl(TagsApplication.DATABASE_URL)
+                    .setDatabaseUrl(Application.DATABASE_URL)
                     .build();
 
             FirebaseApp.initializeApp(options);
