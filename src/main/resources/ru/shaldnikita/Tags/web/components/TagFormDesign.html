@@ -7,31 +7,29 @@
  </head>
  <body>
   <vaadin-vertical-layout margin="false">
-   <vaadin-horizontal-layout width-full margin-left margin-right :middle :center>
-    <vaadin-combo-box scroll-to-selected-item placeholder="Категория" data-item-type="java.lang.String" _id="categorySelect">
-     <option item="Option1">Спорт</option>
-     <option item="Option2">Кино</option>
-     <option item="Option3">Игры</option>
-     <option item="Option4">Пиво</option>
-     <option item="Option5">Прога</option>
-    </vaadin-combo-box>
-    <vaadin-combo-box placeholder="Маркер" data-item-type="java.lang.String" _id="icon">
-     <option item="Option1">Option 1</option>
-     <option item="Option2">Option 2</option>
-     <option item="Option3">Option 3</option>
-    </vaadin-combo-box>
-   </vaadin-horizontal-layout>
-   <vaadin-vertical-layout margin-top="false" margin-bottom="false">
+   <vaadin-vertical-layout margin-left="false" margin-top="false" margin-bottom="false">
     <vaadin-text-area placeholder="Описание" width-full _id="descr"></vaadin-text-area>
    </vaadin-vertical-layout>
-   <vaadin-css-layout _id="buttonsLayout" :center :expand>
-    <vaadin-button icon="fonticon://Vaadin-Icons/e75b" plain-text _id="accept">
-      Добавить 
-    </vaadin-button>
-    <vaadin-button icon="fonticon://Vaadin-Icons/e7ad" plain-text _id="cancel">
-      Отмена 
-    </vaadin-button>
-   </vaadin-css-layout>
+   <vaadin-horizontal-layout width-full :middle :center>
+    <vaadin-vertical-layout width="103.92%" margin-left="false" margin-top="false" margin-bottom="false">
+     <vaadin-combo-box scroll-to-selected-item placeholder="Категория" text-input-allowed="false" data-item-type="java.lang.String" _id="categorySelect">
+      <option item="Option1">Спорт</option>
+      <option item="Option2">Кино</option>
+      <option item="Option3">Игры</option>
+      <option item="Option4">Пиво</option>
+      <option item="Option5">Прога</option>
+     </vaadin-combo-box>
+     <vaadin-combo-box placeholder="Маркер" text-input-allowed="false" data-item-type="com.vaadin.ui.Label" _id="markerSelect"></vaadin-combo-box>
+    </vaadin-vertical-layout>
+    <vaadin-vertical-layout size-auto margin-right="false" margin-top="false" margin-bottom="false" _id="buttonsLayout">
+     <vaadin-button icon="fonticon://Vaadin-Icons/e7ad" plain-text _id="cancel">
+       Отмена 
+     </vaadin-button>
+     <vaadin-button icon="fonticon://Vaadin-Icons/e75b" plain-text _id="accept">
+       Добавить 
+     </vaadin-button>
+    </vaadin-vertical-layout>
+   </vaadin-horizontal-layout>
   </vaadin-vertical-layout>
  </body>
 </html>
