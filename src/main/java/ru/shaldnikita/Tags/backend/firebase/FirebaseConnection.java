@@ -1,4 +1,4 @@
-package ru.shaldnikita.Tags.firebase;
+package ru.shaldnikita.Tags.backend.firebase;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -15,7 +15,7 @@ import java.io.FileInputStream;
  */
 
 @Component
-public class FirebaseConnection implements HasLogger {
+public abstract class FirebaseConnection implements HasLogger {
     private FirebaseOptions options;
 
     @PostConstruct

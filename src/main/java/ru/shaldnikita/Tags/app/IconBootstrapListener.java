@@ -7,20 +7,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 /**
- * Adds link-tags for "add to homescreen" icons to the head-section of the
- * bootstrap page.
- * <p>
- * Generates links of the type
- *
- * <pre>
- * {@code
- * <link rel="icon" sizes="96x96" href="VAADIN/themes/apptheme/icon-96.png">
- * <link rel="apple-touch-icon" sizes="192x192" href=
-"VAADIN/themes/apptheme/icon-192.png">
- * }
- * </pre>
- * </p>
+ * @author n.shaldenkov on 23.11.2017
  */
+
 public class IconBootstrapListener implements BootstrapListener {
 
 	protected String baseUri = "theme://icon-";
@@ -30,12 +19,12 @@ public class IconBootstrapListener implements BootstrapListener {
 
 	@Override
 	public void modifyBootstrapFragment(BootstrapFragmentResponse response) {
-		// NOP
+		// do nothing
 	}
 
 	@Override
 	public void modifyBootstrapPage(BootstrapPageResponse response) {
-		// Generate link-tags for "add to homescreen" icons
+
 		final Document document = response.getDocument();
 		final Element head = document.getElementsByTag("head").get(0);
 		for (String rel : rels) {

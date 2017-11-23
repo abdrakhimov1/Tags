@@ -2,7 +2,7 @@ package ru.shaldnikita.Tags.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vaadin.addon.charts.ChartOptions;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.Viewport;
@@ -22,6 +22,7 @@ import ru.shaldnikita.Tags.web.view.AccessDeniedView;
 @SpringUI
 @Viewport("width=device-width,initial-scale=1.0,user-scalable=no")
 @Title("Tags")
+@Theme("apptheme")
 public class VaadinUI extends UI implements HasLogger {
 
     private final SpringViewProvider viewProvider;

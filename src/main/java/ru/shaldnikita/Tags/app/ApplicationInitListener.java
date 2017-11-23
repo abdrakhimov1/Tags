@@ -6,11 +6,9 @@ import com.vaadin.server.VaadinServiceInitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Configures the VaadinService instance that serves the app through a servlet.
- * <p>
- * Uses a bootstrap listener to modify the bootstrap HTML page and include icons
- * for home screen for mobile devices.
+ * @author n.shaldenkov on 23.11.2017
  */
+
 @Component
 public class ApplicationInitListener implements VaadinServiceInitListener {
 

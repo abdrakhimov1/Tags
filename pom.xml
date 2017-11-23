@@ -122,12 +122,17 @@
 			<version>${vaadin-spring.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-security</artifactId>
 			<version>${vaadin-spring.version}</version>
-		</dependency>-->
+		</dependency>
 
+		<dependency>
+			<groupId>com.vaadin.tapio</groupId>
+			<artifactId>googlemaps</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.vaadin.addon</groupId>
 			<artifactId>confirmdialog</artifactId>
@@ -139,7 +144,7 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-charts</artifactId>
 			<version>4.0.0</version>
@@ -153,28 +158,21 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-board-precompiled</artifactId>
 			<version>1.0.1</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>webcomponents-helper</artifactId>
 			<version>0.2.0</version>
 		</dependency>
 
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!--<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -206,6 +204,8 @@
 				</dependencies>
 				<configuration>
 					<extraJvmArgs>-Xmx2G</extraJvmArgs>
+					<webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets</webappDirectory>
+					<hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets</hostedWebapp>
 				</configuration>
 				<executions>
 					<execution>
@@ -218,10 +218,12 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>

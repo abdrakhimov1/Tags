@@ -7,6 +7,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.vaadin.spring.events.annotation.EnableEventBus;
 import ru.shaldnikita.Tags.web.VaadinUI;
 
+/**
+ * @author n.shaldenkov on 23.11.2017
+ */
 
 @SpringBootApplication(scanBasePackageClasses = { VaadinUI.class, Application.class })
 @EnableEventBus

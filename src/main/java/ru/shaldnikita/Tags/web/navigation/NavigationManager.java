@@ -9,6 +9,7 @@ import com.vaadin.spring.navigator.SpringNavigator;
 import org.springframework.stereotype.Component;
 import ru.shaldnikita.Tags.web.MainView;
 import ru.shaldnikita.Tags.web.view.AccessDeniedView;
+import ru.shaldnikita.Tags.web.view.MapView;
 
 /**
  * Governs view navigation of the app.
@@ -41,7 +42,7 @@ public class NavigationManager extends SpringNavigator {
 			return;
 		}
 
-		navigateTo(AccessDeniedView.class);
+		navigateTo(MapView.class);
 	}
 
 	public void updateViewParameter(String parameter) {
