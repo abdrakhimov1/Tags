@@ -17,4 +17,9 @@ public class ApplicationConfiguration {
 	{
 		return new SecuredViewAccessControl();
 	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

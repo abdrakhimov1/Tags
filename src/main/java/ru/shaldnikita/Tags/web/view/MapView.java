@@ -1,10 +1,13 @@
 package ru.shaldnikita.Tags.web.view;
 
+import com.google.gwt.maps.client.events.click.ClickMapEvent;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.tapio.googlemaps.client.events.MapClickListener;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapMarker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +35,7 @@ public class MapView extends MapViewDesign implements View {
         googleMap.setMinZoom(10);
 
         tagForm.setSizeFull();
-        //tagForm.setVisible(false);
+        tagForm.setVisible(false);
 
         GoogleMapInfoWindow infoWindow = new GoogleMapInfoWindow();
         infoWindow.setHeight(String.valueOf(tagForm.getHeight()*1.5)+tagForm.getHeightUnits());
@@ -40,23 +43,28 @@ public class MapView extends MapViewDesign implements View {
         infoWindow.setAnchorMarker(new GoogleMapMarker());
 
         googleMap.setInfoWindowContents(infoWindow,tagForm);
-        googleMap.addMapClickListener(e -> {
+        googleMap.addMapClickListener(e -> handleMapClick(e));
 
-            if (!googleMap.isInfoWindowOpen(infoWindow)) {
-                infoWindow.setPosition(new LatLon(e.getLat(),e.getLon()));
-                googleMap.openInfoWindow(infoWindow);//tagForm.setVisible(false);
-            }
-            else {
-                googleMap.closeInfoWindow(infoWindow);
-                //tagForm.setVisible(true);
-            }
-        });
-
-        addComponentsAndExpand(googleMap);
+        addComponentsAndExpand(googleMap,tagForm);
     }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
+
+    }
+
+    private void  handleMapClick(LatLon e){
+        GoogleMapMarker addMarker = new GoogleMapMarker("?",e,false, "fonticon://Vaadin-Icons/e80d"+VaadinIcons.QUESTION_CIRCLE.getCodepoint());
+        addMarker.setId(-1);
+            if(!tagForm.isVisible()){
+
+                googleMap.addMarker(addMarker);
+                tagForm.setVisible(true);
+            }else{
+
+                tagForm.setVisible(false);
+                googleMap.removeMarker(addMarker);
+        }
 
     }
 }
