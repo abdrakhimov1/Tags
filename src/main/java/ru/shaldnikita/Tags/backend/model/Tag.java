@@ -14,8 +14,12 @@ public class Tag extends AbstractEntity{
     @NotNull
     private String name;
 
-    @JoinColumn(name = "author_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private User author;
+
+    private Double latitude;
+
+    private Double longitude;
 
     @ElementCollection
     private List<String> categories;
@@ -49,5 +53,21 @@ public class Tag extends AbstractEntity{
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

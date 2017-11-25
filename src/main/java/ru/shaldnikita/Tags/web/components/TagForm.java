@@ -6,7 +6,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vaadin.data.provider.ListDataProvider;
+import com.vaadin.icons.VaadinIcons;
+import com.vaadin.server.Resource;
 import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.ui.IconGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.spring.annotation.PrototypeScope;
 import ru.shaldnikita.Tags.app.Application;
@@ -31,9 +34,10 @@ public class TagForm extends TagFormDesign implements HasLogger{
         getLogger().info("init TagForm");
 
         categorySelect.setDataProvider(new ListDataProvider<>(Arrays.asList(Category.getAllRoles())));
-    }
 
-    public void setDescrValue(String value){
-        descr.setValue(value);
+        markerSelect.setDataProvider(new ListDataProvider<>(Arrays.asList(VaadinIcons.values())));
+        markerSelect.setItemIconGenerator(icon ->{
+            return icon;
+        });
     }
 }

@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.shaldnikita.Tags.backend.model.Tag;
 import ru.shaldnikita.Tags.backend.model.User;
 import ru.shaldnikita.Tags.backend.repositories.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService extends CrudService<User> {
@@ -40,4 +46,5 @@ public class UserService extends CrudService<User> {
     public User save(User entity) {
         return super.save(entity);
     }
+
 }
